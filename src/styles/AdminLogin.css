@@ -1,0 +1,132 @@
+.admin-login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.admin-login-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  padding: 40px;
+  width: 100%;
+}
+
+.admin-login-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.admin-login-header h1 {
+  color: #333;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.admin-login-header p {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.admin-login-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  color: #555;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  background: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  color: #333;
+  font-size: 14px;
+  padding: 12px;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.form-group input:focus {
+  background: white;
+  border-color: #667eea;
+  outline: none;
+}
+
+.form-group input::placeholder {
+  color: #aaa;
+}
+
+.error-message {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 4px;
+  color: #c00;
+  font-size: 13px;
+  margin-bottom: 15px;
+  padding: 10px;
+  text-align: center;
+}
+
+.admin-login-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.admin-login-button:hover:not(:disabled) {
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  transform: translateY(-1px);
+}
+
+.admin-login-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.admin-login-footer {
+  text-align: center;
+}
+
+.security-notice {
+  background: #f5f5f5;
+  border-radius: 4px;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  padding: 12px;
+}
+
+.back-to-main {
+  color: #667eea;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.back-to-main:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}

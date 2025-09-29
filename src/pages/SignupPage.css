@@ -1,0 +1,44 @@
+/* SignupPage inherits most styles from LoginPage.css */
+@import './LoginPage.css';
+
+/* Terms and Conditions - Additional styles for Signup */
+.terms {
+  margin: 16px 0;
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #666666;
+  font-size: 13px;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.terms-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #5fb4b4;
+  cursor: pointer;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.terms-link {
+  color: #5fb4b4;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.terms-link:hover {
+  color: #4a8d8d;
+  text-decoration: underline;
+}
+
+/* Naver Icon - Additional style for Naver button */
+.naver-icon {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}

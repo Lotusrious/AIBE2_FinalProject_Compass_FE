@@ -1,0 +1,277 @@
+.travel-plan-page {
+  min-height: 100vh;
+  padding: 48px 24px 80px;
+  background: radial-gradient(circle at top, rgba(102, 126, 234, 0.25), rgba(15, 23, 42, 0.95) 60%);
+  color: #f8fafc;
+}
+
+.plan-hero {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 960px;
+  margin: 0 auto 32px;
+  padding: 24px 28px;
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+}
+
+.compass-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: inset 0 0 10px rgba(148, 163, 184, 0.1);
+}
+
+.compass-badge svg {
+  width: 60px;
+  height: 60px;
+}
+
+.hero-text h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+
+.hero-text p {
+  font-size: 16px;
+  color: rgba(226, 232, 240, 0.75);
+  margin: 0;
+}
+
+.plan-status {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 24px;
+  text-align: center;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.plan-error {
+  max-width: 720px;
+  margin: 60px auto 0;
+  padding: 32px;
+  text-align: center;
+  border-radius: 16px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #fecaca;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.plan-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  max-width: 960px;
+  margin: 0 auto 32px;
+}
+
+.summary-item {
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: rgba(226, 232, 240, 0.65);
+  letter-spacing: 0.2px;
+}
+
+.summary-value {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.plan-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 960px;
+  margin: 0 auto 40px;
+}
+
+.day-card {
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.35);
+  padding: 24px;
+}
+
+.day-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.day-card__header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.day-card__date {
+  margin: 6px 0 0;
+  font-size: 15px;
+  color: rgba(226, 232, 240, 0.6);
+}
+
+.day-card__badge {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  font-size: 13px;
+  color: rgba(199, 210, 254, 0.95);
+}
+
+.time-blocks {
+  display: grid;
+  gap: 16px;
+}
+
+.time-block {
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.time-block__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.time-block__slot {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.time-block__count {
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.6);
+}
+
+.place-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.place-item {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.place-item__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.place-item__tag {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.1);
+  color: rgba(129, 140, 248, 0.95);
+  font-size: 12px;
+  border: 1px solid rgba(99, 102, 241, 0.45);
+}
+
+.place-item__address {
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.55);
+  margin: 0;
+}
+
+.place-item__meta {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.6);
+}
+
+.empty-block {
+  padding: 18px;
+  text-align: center;
+  color: rgba(226, 232, 240, 0.6);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px dashed rgba(148, 163, 184, 0.3);
+}
+
+.plan-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.primary-button {
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  background: linear-gradient(135deg, #facc15 0%, #f97316 100%);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 20px rgba(250, 204, 21, 0.3);
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(249, 115, 22, 0.35);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .travel-plan-page {
+    padding: 32px 16px 60px;
+  }
+
+  .plan-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .plan-summary {
+    grid-template-columns: 1fr;
+  }
+}

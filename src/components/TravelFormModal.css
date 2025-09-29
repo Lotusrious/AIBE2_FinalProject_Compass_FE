@@ -1,0 +1,262 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.travel-form {
+  padding: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="time"],
+.form-group select {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4285f4;
+}
+
+.form-group-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* 여행지 입력 */
+.destination-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.destination-input input {
+  flex: 1;
+}
+
+.undecided-toggle {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background-color: rgba(66, 133, 244, 0.12);
+  border: 1px solid rgba(66, 133, 244, 0.35);
+  color: #1a4fb2;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.undecided-toggle:hover {
+  background-color: rgba(66, 133, 244, 0.2);
+}
+
+.undecided-toggle.active {
+  background-color: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.45);
+  color: #047857;
+}
+
+.undecided-toggle__icon {
+  font-size: 14px;
+}
+
+.destination-input button {
+  padding: 10px 20px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.destination-input button:hover {
+  background-color: #3367d6;
+}
+
+.destination-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.destination-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border-radius: 16px;
+  font-size: 14px;
+}
+
+.destination-tag button {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.destination-tag button:hover {
+  color: #0d47a1;
+}
+
+/* 여행 스타일 */
+.style-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.style-option {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 20px;
+  background: white;
+  color: #666;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.style-option:hover {
+  border-color: #4285f4;
+  color: #4285f4;
+}
+
+.style-option.selected {
+  background-color: #4285f4;
+  border-color: #4285f4;
+  color: white;
+}
+
+/* 액션 버튼 */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn-cancel,
+.btn-submit {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-cancel {
+  background: white;
+  border: 2px solid #e0e0e0;
+  color: #666;
+}
+
+.btn-cancel:hover {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+}
+
+.btn-submit {
+  background-color: #4285f4;
+  border: none;
+  color: white;
+}
+
+.btn-submit:hover {
+  background-color: #3367d6;
+}

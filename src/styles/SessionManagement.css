@@ -1,0 +1,206 @@
+.session-management {
+  padding: 20px;
+}
+
+.session-management h1 {
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-bar select {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.stats-summary {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.stats-summary span {
+  background: #f5f5f5;
+  border-radius: 4px;
+  color: #666;
+  font-size: 14px;
+  padding: 8px 15px;
+}
+
+.session-table-container {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.session-table thead {
+  background: #f5f5f5;
+}
+
+.session-table th {
+  color: #666;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 12px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.session-table td {
+  border-top: 1px solid #e0e0e0;
+  color: #333;
+  font-size: 14px;
+  padding: 12px;
+}
+
+.session-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.phase-badge {
+  background: #e3f2fd;
+  border-radius: 3px;
+  color: #1565c0;
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.status-badge {
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  text-transform: uppercase;
+}
+
+.status-active {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-completed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.status-abandoned {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.action-btn {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  color: #333;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  transition: all 0.2s;
+}
+
+.view-btn:hover {
+  background: #1976d2;
+  border-color: #1976d2;
+  color: white;
+}
+
+.terminate-btn:hover {
+  background: #f44336;
+  border-color: #f44336;
+  color: white;
+}
+
+/* 모달 스타일 */
+.session-detail-modal {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  padding: 30px;
+  position: relative;
+  width: 90%;
+}
+
+.modal-content h2 {
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.detail-item label {
+  color: #666;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.detail-item span {
+  color: #333;
+  font-size: 14px;
+}
+
+.close-btn {
+  background: #1976d2;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 10px 20px;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: #1565c0;
+}

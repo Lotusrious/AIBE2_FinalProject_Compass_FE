@@ -1,0 +1,393 @@
+.pre-stage-management {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.pre-stage-management h1 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* 신규 도시 추가 섹션 */
+.new-city-section {
+  background: white;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.new-city-section h2 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.add-city-form {
+  display: flex;
+  gap: 10px;
+}
+
+.add-city-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.add-city-form input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* 버튼 스타일 */
+.btn-primary {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #1565c0;
+}
+
+.btn-secondary {
+  background: white;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  margin-right: 10px;
+}
+
+.btn-secondary:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+/* 일괄 작업 섹션 */
+.bulk-actions {
+  background: white;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.bulk-actions h2 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* 지역별 관리 섹션 */
+.regions-section {
+  background: white;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.regions-section h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.regions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.region-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 15px;
+  transition: border-color 0.2s;
+}
+
+.region-card:hover {
+  border-color: #ccc;
+}
+
+.region-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.region-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.region-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.btn-collect,
+.btn-view {
+  padding: 5px 10px;
+  font-size: 12px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-collect {
+  background: white;
+  color: #4caf50;
+  border: 1px solid #4caf50;
+}
+
+.btn-collect:hover {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-collect:disabled {
+  background: #f5f5f5;
+  color: #999;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
+.btn-view {
+  background: white;
+  color: #1976d2;
+  border: 1px solid #1976d2;
+}
+
+.btn-view:hover {
+  background: #1976d2;
+  color: white;
+}
+
+/* 상태 배지 */
+.status-badge {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.status-idle {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.status-collecting {
+  background: #fff3cd;
+  color: #856404;
+  animation: pulse 1.5s infinite;
+}
+
+.status-completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* 데이터 조회 섹션 */
+.data-view-section {
+  background: white;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.data-view-section h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* 통계 패널 */
+.stats-panel {
+  display: flex;
+  gap: 30px;
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-item label {
+  font-weight: 600;
+  color: #666;
+}
+
+.stat-item span {
+  color: #333;
+  font-size: 18px;
+}
+
+/* 필터 */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.filters select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.btn-refresh {
+  padding: 8px 16px;
+  background: white;
+  color: #1976d2;
+  border: 1px solid #1976d2;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn-refresh:hover {
+  background: #1976d2;
+  color: white;
+}
+
+/* 데이터 테이블 */
+.data-table-container {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead {
+  background: #f5f5f5;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.data-table th {
+  font-weight: 500;
+  color: #666;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.data-table td {
+  color: #333;
+  font-size: 14px;
+}
+
+.data-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.address-cell {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 카테고리 배지 */
+.category-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.category-관광지 {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.category-식당 {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.category-카페 {
+  background: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.category-숙소 {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.category-액티비티 {
+  background: #fce4ec;
+  color: #c2185b;
+}
+
+/* 로딩 & 빈 데이터 */
+.loading,
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 16px;
+}
+
+.no-data {
+  background: #f5f5f5;
+  border-radius: 4px;
+}
