@@ -1021,21 +1021,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ threadId, onNewChat, isNe
       ];
 
       // Stage 3 일정 생성 (선택한 장소들로)
-      const itinerary: Array<{
-        day: number;
-        date: string;
-        theme: string;
-        places: Array<{
-          name: string;
-          category: string | undefined;
-          duration: number;
-          cost: number;
-          latitude: number;
-          longitude: number;
-          description: string;
-          rating: number;
-        }>;
-      }> = [];
+      const itinerary = [];
       const placesPerDay = Math.ceil(selectedPlaces.length / days);
 
       // 여행 스타일에 따른 시간 조정
