@@ -29,8 +29,19 @@ const MainPage: React.FC = () => {
 
   // Load user data and recent chats on component mount
   useEffect(() => {
+    // Clear localStorage chat data
+    const clearLocalStorageChats = () => {
+      const keys = Object.keys(localStorage);
+      keys.forEach(key => {
+        if (key.startsWith('chat_') || key.includes('thread') || key.includes('message')) {
+          localStorage.removeItem(key);
+        }
+      });
+    };
+
+    clearLocalStorageChats();
     loadUserData();
-    
+
     // Remove auto-refresh to prevent excessive API calls
     // Only refresh when user performs actions
   }, []);
@@ -108,30 +119,49 @@ const MainPage: React.FC = () => {
       icon: '🚗',
       title: '당일치기',
       description: '가까운 곳에서 즐기기'
+    },
+    {
+      id: 'seoul',
+      icon: '🌃',
+      title: '서울 투어',
+      description: '도심 속 핫플레이스'
+    },
+    {
+      id: 'gangwon',
+      icon: '⛰️',
+      title: '강원도 자연',
+      description: '산과 바다의 조화'
+    },
+    {
+      id: 'jeonju',
+      icon: '🍲',
+      title: '전주 한옥마을',
+      description: '전통과 맛의 고장'
+    },
+    {
+      id: 'yeosu',
+      icon: '🌊',
+      title: '여수 밤바다',
+      description: '낭만적인 해안 도시'
+    },
+    {
+      id: 'sokcho',
+      icon: '🦐',
+      title: '속초 해변',
+      description: '동해안의 신선한 해산물'
     }
   ];
 
   const handleChatSelect = async (id: string) => {
     setSelectedChat(id);
+    const option = chatOptions.find(opt => opt.id === id);
+    const message = `${option?.title}에 대해 자세히 알려주세요`;
+
+    setInitialMessage(message);
     setShowChatInterface(true);
-    
-    // Create a new chat thread with initial context
-    try {
-      setIsLoading(true);
-      
-      // REQ-CHAT-001: ✅ IMPLEMENTED
-      const thread = await chatService.createThread({
-        userId: currentUserId,
-        initialMessage: `${chatOptions.find(opt => opt.id === id)?.title} 관련 문의`
-      });
-      
-      setCurrentThreadId(thread.id);
-      setChatThreads(prev => [thread, ...prev]);
-    } catch (error) {
-      console.error('Error creating chat thread:', error);
-    } finally {
-      setIsLoading(false);
-    }
+    setCurrentThreadId(undefined);
+    setIsNewChat(true);
+    setTimeout(() => setIsNewChat(false), 100);
   };
 
   const handleSendMessage = async () => {
@@ -144,6 +174,7 @@ const MainPage: React.FC = () => {
   const [isNewChat, setIsNewChat] = useState(false);
   const [showAllChats, setShowAllChats] = useState(false);
   const [showChatModal, setShowChatModal] = useState(false);
+  const [initialMessage, setInitialMessage] = useState<string | undefined>(undefined);
   
   const handleNewChat = () => {
     setCurrentThreadId(undefined);
@@ -203,8 +234,7 @@ const MainPage: React.FC = () => {
                     className={`recent-chat-item ${currentThreadId === thread.id ? 'active' : ''}`}
                     onClick={() => handleThreadClick(thread.id)}
                   >
-                    <div className="chat-item-title">{thread.title}</div>
-                    <div className="chat-item-preview">{thread.lastMessage}</div>
+                    <div className="chat-item-title">{thread.lastMessage || thread.title}</div>
                     <div className="chat-item-time">
                       {thread.lastMessageAt ? new Date(thread.lastMessageAt).toLocaleDateString() : ''}
                     </div>
@@ -246,8 +276,7 @@ const MainPage: React.FC = () => {
                       setShowChatModal(false);
                     }}
                   >
-                    <div className="chat-item-title">{thread.title}</div>
-                    <div className="chat-item-preview">{thread.lastMessage}</div>
+                    <div className="chat-item-title">{thread.lastMessage || thread.title}</div>
                     <div className="chat-item-time">
                       {thread.lastMessageAt ? new Date(thread.lastMessageAt).toLocaleDateString() : ''}
                     </div>
@@ -261,13 +290,9 @@ const MainPage: React.FC = () => {
         <div className="sidebar-section">
           <div className="section-title">바로가기</div>
           <div className="quick-links">
-            <button 
+            <button
               className="quick-link-item"
-              onClick={() => {
-                // REQ-TRIP-003: ✅ IMPLEMENTED
-                console.log('Recent trips:', recentTrips);
-                // navigate('/trips');
-              }}
+              onClick={() => navigate('/my-trips')}
             >
               <span className="link-icon">✈️</span>
               <span>내 여정 ({recentTrips.length})</span>
@@ -298,12 +323,14 @@ const MainPage: React.FC = () => {
       </div>
 
         {/* Main Content */}
-        <div className="main-content">
+        <div className={`main-content ${!showChatInterface ? 'main-content--centered' : ''}`}>
           {showChatInterface ? (
-            <ChatInterface 
-              threadId={currentThreadId} 
+            <ChatInterface
+              threadId={currentThreadId}
               onNewChat={handleNewChat}
               isNewChat={isNewChat}
+              initialMessage={initialMessage}
+              onMessageSent={() => setInitialMessage(undefined)}
               onThreadUpdate={async () => {
                 // Reload chat threads when a message is sent
                 const threads = await chatService.getThreads(currentUserId, 0, 20);
@@ -334,41 +361,6 @@ const MainPage: React.FC = () => {
                     <div className="option-description">{option.description}</div>
                   </button>
                 ))}
-              </div>
-
-              <div className="input-section">
-                <div className="input-container">
-                  <button 
-                    className="attach-button"
-                    onClick={() => console.log('Image upload clicked')}
-                    disabled={isLoading}
-                    title="이미지"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                      <circle cx="8.5" cy="8.5" r="1.5"/>
-                      <polyline points="21 15 16 10 5 21"/>
-                    </svg>
-                  </button>
-                  <input
-                    type="text"
-                    placeholder="여행에 대해 물어보세요..."
-                    className="chat-input"
-                    value={inputMessage}
-                    onChange={(e) => setInputMessage(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                    disabled={isLoading}
-                  />
-                  <div className="input-actions">
-                    <button 
-                      className={`send-button ${inputMessage.trim() ? 'ready' : ''}`}
-                      onClick={handleSendMessage}
-                      disabled={isLoading || !inputMessage.trim()}
-                    >
-                      <span>{isLoading ? '⏳' : '➤'}</span>
-                    </button>
-                  </div>
-                </div>
               </div>
             </>
           )}

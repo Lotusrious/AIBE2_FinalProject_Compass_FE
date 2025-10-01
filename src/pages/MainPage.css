@@ -418,6 +418,11 @@
   height: 100%;
 }
 
+.main-content--centered {
+  justify-content: center;
+  align-items: center;
+}
+
 /* Welcome section */
 .welcome-section {
   text-align: center;
@@ -455,12 +460,10 @@
 /* Chat options grid */
 .chat-options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   margin-bottom: 40px;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 900px;
   width: 100%;
 }
 

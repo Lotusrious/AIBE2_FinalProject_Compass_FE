@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #764ba2;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Chat API Test</h1>
+
+    <div class="section">
+        <h2>Direct API Test</h2>
+        <button onclick="testUnifiedChat()">Test Unified Chat API</button>
+        <button onclick="clearOutput()">Clear</button>
+        <pre id="output"></pre>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8080';
+
+        function log(message, isError = false) {
+            const output = document.getElementById('output');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = isError ? 'error' : 'success';
+            output.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+        }
+
+        async function testUnifiedChat() {
+            try {
+                log('Testing /api/chat/unified endpoint...');
+
+                const response = await fetch(`${API_URL}/api/chat/unified`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        threadId: `test_${Date.now()}`,
+                        message: '여행계획 세워줘',
+                        userId: 1
+                    })
+                });
+
+                const data = await response.json();
+                log('Response: ' + JSON.stringify(data, null, 2));
+
+                if (data.type === 'QUICK_FORM') {
+                    log('✅ SUCCESS: Backend returned QUICK_FORM type!');
+                } else {
+                    log('ℹ️ Backend returned type: ' + data.type);
+                }
+
+            } catch (error) {
+                log('Error: ' + error.message, true);
+            }
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Storage</title>
+</head>
+<body>
+    <h1>Storage 정리 도구</h1>
+    <button onclick="clearAll()">모든 Storage 비우기</button>
+    <button onclick="clearAuth()">인증 정보만 비우기</button>
+
+    <script>
+        function clearAll() {
+            localStorage.clear();
+            sessionStorage.clear();
+            alert('모든 Storage가 비워졌습니다. http://localhost:3000으로 돌아가세요.');
+            window.location.href = 'http://localhost:3000';
+        }
+
+        function clearAuth() {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('user');
+            sessionStorage.removeItem('accessToken');
+            sessionStorage.removeItem('refreshToken');
+            sessionStorage.removeItem('user');
+            alert('인증 정보가 비워졌습니다. http://localhost:3000으로 돌아가세요.');
+            window.location.href = 'http://localhost:3000';
+        }
+    </script>
+</body>
+</html>

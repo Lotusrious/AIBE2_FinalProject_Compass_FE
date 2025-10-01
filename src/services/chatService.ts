@@ -53,6 +53,12 @@ export interface Message {
   data?: any;
   phase?: string;
   followUpQuestion?: FollowUpQuestion | null; // Follow-up 질문 정보
+  quickForm?: boolean;  // Quick Travel Form 표시 여부
+  scenarioForm?: {  // 시나리오용 - 인라인 폼 데이터
+    type: 'placeSelection';
+    places: any[];
+    region: string;
+  };
 }
 
 export interface CreateThreadRequest {
@@ -217,6 +223,112 @@ class ChatService {
       }
     }
   }
+
+  /**
+   * UnifiedChatController를 통한 메시지 전송
+   * POST /api/chat/unified
+   */
+  async sendUnifiedMessage(threadId: string, message: string, userId?: number): Promise<any> {
+    // 먼저 실제 백엔드 호출 시도
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      console.log('[chatService.sendUnifiedMessage] Trying backend API');
+
+      const response = await chatAxios.post(
+        `/api/chat/unified`,
+        {
+          threadId,
+          message,
+          userId
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            ...(accessToken && { 'Authorization': `Bearer ${accessToken}` })
+          }
+        }
+      );
+
+      console.log('[chatService.sendUnifiedMessage] Backend response:', response.data);
+
+      // 백엔드 응답을 그대로 반환 (content, phase 등 포함)
+      return response.data;
+
+    } catch (error) {
+      console.log('[chatService.sendUnifiedMessage] Backend failed, using enhanced mock data', error);
+
+      // 향상된 Mock 데이터 - 실제 백엔드 동작과 유사하게
+      const lowerMessage = message.toLowerCase();
+
+      // 여행 키워드 감지
+      const isTravelQuery = lowerMessage.includes('여행') ||
+                           lowerMessage.includes('서울') ||
+                           lowerMessage.includes('부산') ||
+                           lowerMessage.includes('제주') ||
+                           lowerMessage.includes('강릉') ||
+                           lowerMessage.includes('경주');
+
+      // Phase 관리를 위한 세션 스토리지 사용
+      let currentPhase = sessionStorage.getItem(`phase_${threadId}`) || 'PHASE_1';
+
+      if (isTravelQuery && currentPhase === 'PHASE_1') {
+        // Phase 1: 의도 파악 및 초기 응답
+        sessionStorage.setItem(`phase_${threadId}`, 'PHASE_1_PROCESSING');
+
+        const destination = lowerMessage.includes('서울') ? '서울' :
+                          lowerMessage.includes('부산') ? '부산' :
+                          lowerMessage.includes('제주') ? '제주' :
+                          lowerMessage.includes('강릉') ? '강릉' :
+                          lowerMessage.includes('경주') ? '경주' : '서울';
+
+        return {
+          response: `안녕하세요! ${destination} 여행을 계획 중이시군요! 🎉\n\n완벽한 여행 일정을 만들어드리기 위해 몇 가지 정보가 필요해요.\n\n먼저 여행 날짜와 인원수를 알려주시겠어요?\n예) 12월 20일부터 3일간, 2명이서 갈 예정이에요`,
+          phase: 'PHASE_1',
+          intent: 'TRAVEL_PLANNING',
+          destination: destination,
+          threadId
+        };
+      }
+
+      // 날짜/인원 정보가 포함된 경우 Phase 2로 전환
+      const hasDateInfo = lowerMessage.includes('일') ||
+                         lowerMessage.includes('월') ||
+                         lowerMessage.includes('주') ||
+                         lowerMessage.includes('명') ||
+                         lowerMessage.includes('사람');
+
+      if (hasDateInfo && sessionStorage.getItem(`phase_${threadId}`) === 'PHASE_1_PROCESSING') {
+        // Phase 2 완료 - 장소 선택 폼 표시
+        sessionStorage.setItem(`phase_${threadId}`, 'PHASE_2');
+
+        return {
+          response: `좋습니다! 여행 정보를 확인했어요.\n\n이제 방문하고 싶은 장소들을 선택해주세요. 아래에서 관심 있는 장소들을 골라보세요! 🗺️\n\n추천 장소들은 오렌지색 배지로 표시되어 있어요.`,
+          phase: 'PHASE_2',
+          showPlaceSelection: true,
+          threadId
+        };
+      }
+
+      // Phase 2 상태에서의 일반 메시지
+      if (currentPhase === 'PHASE_2') {
+        return {
+          response: '장소를 선택해주시면 최적의 동선으로 일정을 짜드릴게요! 원하시는 장소들을 선택해주세요.',
+          phase: 'PHASE_2',
+          showPlaceSelection: true,
+          threadId
+        };
+      }
+
+      // 기본 응답 (Phase 1)
+      return {
+        response: '무엇을 도와드릴까요? 여행 계획이 필요하시면 "서울 여행 가고 싶어" 같이 말씀해주세요!',
+        phase: 'PHASE_1',
+        threadId
+      };
+    }
+  }
+
+  private messageCounter: number = 0;
 
   /**
    * REQ-CHAT-004: 대화 조회 API

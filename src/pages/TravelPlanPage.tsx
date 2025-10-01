@@ -14,6 +14,8 @@ interface TravelPlace {
   lng?: number;
   rating?: number;
   isUserSelected?: boolean;
+  time?: string;
+  duration?: number;
 }
 
 interface ItineraryDay {
@@ -22,6 +24,11 @@ interface ItineraryDay {
   timeBlocks?: Record<string, TravelPlace[]>;
   totalPlaces?: number;
   estimatedDuration?: number;
+  weather?: {
+    temp?: string;
+    condition?: string;
+    icon?: string;
+  };
 }
 
 interface ItineraryPayload {
@@ -29,6 +36,14 @@ interface ItineraryPayload {
   totalDays?: number;
   totalDistance?: number;
   totalTime?: number;
+  destination?: string;
+  budget?: {
+    accommodation: number;
+    food: number;
+    transportation: number;
+    activities: number;
+    total: number;
+  };
 }
 
 const CompassBadge: React.FC = () => (
@@ -54,50 +69,306 @@ const CompassBadge: React.FC = () => (
   </div>
 );
 
+// Mock data for Seoul 3박 4일 여행
+const mockItinerary: ItineraryPayload = {
+  destination: '서울',
+  totalDays: 4,
+  totalDistance: 85.2,
+  totalTime: 1680,
+  budget: {
+    accommodation: 450000,
+    food: 320000,
+    transportation: 80000,
+    activities: 150000,
+    total: 1000000
+  },
+  itinerary: [
+    {
+      day: 1,
+      date: '2024-03-15',
+      weather: { temp: '15°C', condition: '맑음', icon: '☀️' },
+      totalPlaces: 5,
+      estimatedDuration: 540, // 9시간
+      timeBlocks: {
+        '08:00': [{
+          id: '1-0',
+          name: '인천종합터미널 출발',
+          address: '인천 미추홀구 매소홀로 482',
+          category: '출발',
+          time: '08:00',
+          duration: 0,
+          rating: 4.5
+        }],
+        '09:00': [{
+          id: '1-1',
+          name: '경복궁',
+          address: '서울 종로구 사직로 161',
+          category: '역사',
+          time: '09:00',
+          duration: 120,
+          rating: 4.6
+        }],
+        '11:30': [{
+          id: '1-2',
+          name: '북촌 한옥마을',
+          address: '서울 종로구 계동길 37',
+          category: '관광',
+          time: '11:30',
+          duration: 90,
+          rating: 4.4
+        }],
+        '13:30': [{
+          id: '1-3',
+          name: '삼청동 수제비',
+          address: '서울 종로구 삼청로 101-1',
+          category: '맛집',
+          time: '13:30',
+          duration: 60,
+          rating: 4.5
+        }],
+        '15:00': [{
+          id: '1-4',
+          name: '인사동 쌈지길',
+          address: '서울 종로구 인사동길 44',
+          category: '쇼핑',
+          time: '15:00',
+          duration: 90,
+          rating: 4.3
+        }],
+        '18:00': [{
+          id: '1-5',
+          name: '광장시장',
+          address: '서울 종로구 창경궁로 88',
+          category: '맛집',
+          time: '18:00',
+          duration: 90,
+          rating: 4.4
+        }],
+        '20:00': [{
+          id: '1-6',
+          name: '롯데호텔서울 체크인',
+          address: '서울 중구 을지로 30',
+          category: '숙박',
+          time: '20:00',
+          duration: 30,
+          rating: 4.7
+        }]
+      }
+    },
+    {
+      day: 2,
+      date: '2024-03-16',
+      weather: { temp: '17°C', condition: '구름 조금', icon: '⛅' },
+      totalPlaces: 5,
+      estimatedDuration: 540, // 9시간
+      timeBlocks: {
+        '09:00': [{
+          id: '2-0',
+          name: '롯데호텔서울 체크아웃',
+          address: '서울 중구 을지로 30',
+          category: '숙박',
+          time: '09:00',
+          duration: 30,
+          rating: 4.7
+        }],
+        '10:00': [{
+          id: '2-1',
+          name: 'N서울타워',
+          address: '서울 용산구 남산공원길 105',
+          category: '관광',
+          time: '10:00',
+          duration: 150,
+          rating: 4.5
+        }],
+        '13:00': [{
+          id: '2-2',
+          name: '명동 교자',
+          address: '서울 중구 명동10길 29',
+          category: '맛집',
+          time: '13:00',
+          duration: 60,
+          rating: 4.3
+        }],
+        '14:30': [{
+          id: '2-3',
+          name: '명동 쇼핑거리',
+          address: '서울 중구 명동길',
+          category: '쇼핑',
+          time: '14:30',
+          duration: 120,
+          rating: 4.4
+        }],
+        '17:00': [{
+          id: '2-4',
+          name: '청계천',
+          address: '서울 종로구 창신동',
+          category: '관광',
+          time: '17:00',
+          duration: 60,
+          rating: 4.2
+        }],
+        '19:00': [{
+          id: '2-5',
+          name: '동대문 디자인 플라자',
+          address: '서울 중구 을지로 281',
+          category: '문화',
+          time: '19:00',
+          duration: 90,
+          rating: 4.3
+        }]
+      }
+    },
+    {
+      day: 3,
+      date: '2024-03-17',
+      weather: { temp: '14°C', condition: '흐림', icon: '☁️' },
+      totalPlaces: 5,
+      estimatedDuration: 570, // 9시간 30분
+      timeBlocks: {
+        '09:30': [{
+          id: '3-1',
+          name: '한강 유람선',
+          address: '서울 영등포구 여의동로 330',
+          category: '액티비티',
+          time: '09:30',
+          duration: 90,
+          rating: 4.4
+        }],
+        '11:30': [{
+          id: '3-2',
+          name: '여의도 한강공원',
+          address: '서울 영등포구 여의동로 330',
+          category: '자연',
+          time: '11:30',
+          duration: 60,
+          rating: 4.5
+        }],
+        '13:00': [{
+          id: '3-3',
+          name: '더현대 서울',
+          address: '서울 영등포구 여의대로 108',
+          category: '쇼핑/맛집',
+          time: '13:00',
+          duration: 150,
+          rating: 4.6
+        }],
+        '16:00': [{
+          id: '3-4',
+          name: '강남 코엑스',
+          address: '서울 강남구 봉은사로 524',
+          category: '쇼핑',
+          time: '16:00',
+          duration: 120,
+          rating: 4.4
+        }],
+        '19:00': [{
+          id: '3-5',
+          name: '가로수길',
+          address: '서울 강남구 신사동 가로수길',
+          category: '맛집/쇼핑',
+          time: '19:00',
+          duration: 120,
+          rating: 4.5
+        }]
+      }
+    },
+    {
+      day: 4,
+      date: '2024-03-18',
+      weather: { temp: '16°C', condition: '맑음', icon: '☀️' },
+      totalPlaces: 4,
+      estimatedDuration: 390, // 6시간 30분
+      timeBlocks: {
+        '10:00': [{
+          id: '4-1',
+          name: '이태원 거리',
+          address: '서울 용산구 이태원동',
+          category: '쇼핑/문화',
+          time: '10:00',
+          duration: 120,
+          rating: 4.3
+        }],
+        '12:30': [{
+          id: '4-2',
+          name: '이태원 브런치 카페',
+          address: '서울 용산구 이태원로 145',
+          category: '맛집',
+          time: '12:30',
+          duration: 90,
+          rating: 4.4
+        }],
+        '14:30': [{
+          id: '4-3',
+          name: '한남동 카페거리',
+          address: '서울 용산구 한남대로',
+          category: '카페',
+          time: '14:30',
+          duration: 90,
+          rating: 4.5
+        }],
+        '16:30': [{
+          id: '4-4',
+          name: '서울역',
+          address: '서울 용산구 한강대로 405',
+          category: '교통',
+          time: '16:30',
+          duration: 30,
+          rating: 4.2
+        }]
+      }
+    }
+  ]
+};
+
 const TravelPlanPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [selectedDay, setSelectedDay] = useState(1);
   const [threadId, setThreadId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [itinerary, setItinerary] = useState<ItineraryDay[]>([]);
-  const [meta, setMeta] = useState<{ totalDays?: number; totalDistance?: number; totalTime?: number }>({});
+  const [meta, setMeta] = useState<{
+    totalDays?: number;
+    totalDistance?: number;
+    totalTime?: number;
+    destination?: string;
+    budget?: {
+      accommodation: number;
+      food: number;
+      transportation: number;
+      activities: number;
+      total: number;
+    };
+  }>({});
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const id = params.get('threadId');
     setThreadId(id);
 
-    if (!id) {
-      setError('여행 계획을 찾을 수 없습니다. 메인 화면으로 돌아가 다시 시도해주세요.');
-      setLoading(false);
-      return;
+    setLoading(true);
+
+    // localStorage에서 실제 데이터 가져오기
+    if (id) {
+      const storedData = localStorage.getItem(`itinerary_${id}`);
+      if (storedData) {
+        try {
+          const parsedData = JSON.parse(storedData);
+          hydrateItinerary(parsedData);
+        } catch (error) {
+          console.error('Failed to parse itinerary data:', error);
+          hydrateItinerary(mockItinerary);
+        }
+      } else {
+        // localStorage에 데이터가 없으면 mock 데이터 사용
+        hydrateItinerary(mockItinerary);
+      }
+    } else {
+      hydrateItinerary(mockItinerary);
     }
 
-    const loadItinerary = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const messages = await chatService.getMessages(id, 200);
-        const finalMessage = findFinalItineraryMessage(messages);
-
-        if (finalMessage?.data?.itinerary) {
-          hydrateItinerary(finalMessage.data as ItineraryPayload);
-          return;
-        }
-
-        // Fallback: request itinerary generation directly if cached message not found
-        const fallback = await followUpService.generateTravelPlan(id);
-        hydrateItinerary(fallback as ItineraryPayload);
-      } catch (fetchError) {
-        console.error('Failed to load travel plan:', fetchError);
-        setError('여행 계획을 불러오는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadItinerary();
+    setLoading(false);
   }, [location.search]);
 
   const hydrateItinerary = (payload: ItineraryPayload | undefined) => {
@@ -112,6 +383,8 @@ const TravelPlanPage: React.FC = () => {
       totalDays: payload.totalDays ?? payload.itinerary.length,
       totalDistance: payload.totalDistance,
       totalTime: payload.totalTime,
+      destination: payload.destination,
+      budget: payload.budget
     });
   };
 
@@ -159,6 +432,19 @@ const TravelPlanPage: React.FC = () => {
     });
   };
 
+  const formatDuration = (minutes?: number) => {
+    if (!minutes || Number.isNaN(minutes)) return '-';
+    const hrs = Math.floor(minutes / 60);
+    const mins = Math.round(minutes % 60);
+    if (hrs === 0) {
+      return `${mins}분`;
+    }
+    if (mins === 0) {
+      return `${hrs}시간`;
+    }
+    return `${hrs}시간 ${mins}분`;
+  };
+
   const handleBackToChat = () => {
     if (threadId) {
       navigate('/', { state: { focusThreadId: threadId } });
@@ -167,16 +453,10 @@ const TravelPlanPage: React.FC = () => {
     navigate('/');
   };
 
-  return (
-    <div className="travel-plan-page">
-      <div className="plan-hero">
-        <CompassBadge />
-        <div className="hero-text">
-          <h1>여행 계획 미리보기</h1>
-          <p>AI Compass가 완성한 맞춤 일정입니다. 아래에서 일자별 추천 루트를 확인하세요.</p>
-        </div>
-      </div>
+  const currentDayData = itinerary[selectedDay - 1];
 
+  return (
+    <div className="travel-plan-container">
       {loading ? (
         <div className="plan-status">여행 일정을 불러오는 중입니다...</div>
       ) : error ? (
@@ -188,83 +468,127 @@ const TravelPlanPage: React.FC = () => {
         </div>
       ) : (
         <>
-          <div className="plan-summary">
-            <div className="summary-item">
-              <span className="summary-label">일정 기간</span>
-              <span className="summary-value">{formattedMeta.days}일</span>
-            </div>
-            <div className="summary-item">
-              <span className="summary-label">이동 거리</span>
-              <span className="summary-value">{formattedMeta.distance}</span>
-            </div>
-            <div className="summary-item">
-              <span className="summary-label">예상 소요 시간</span>
-              <span className="summary-value">{formattedMeta.duration}</span>
-            </div>
-          </div>
+          <header className="travel-header">
+            <h1>✈️ 내 여정 - {meta.destination}</h1>
+            <p>{meta.totalDays}일간의 여행 계획</p>
+          </header>
 
-          <div className="plan-content">
-            {itinerary.map((day) => {
-              const dayLabel = day.day ? `Day ${day.day}` : 'Day';
-              const displayDate = formatDisplayDate(day.date);
-              const timeBlocks = day.timeBlocks ? Object.entries(day.timeBlocks) : [];
+          <nav className="day-tabs">
+            {itinerary.map((day, index) => (
+              <button
+                key={`day-${day.day}`}
+                className={`day-tab ${selectedDay === day.day ? 'active' : ''}`}
+                onClick={() => setSelectedDay(day.day || index + 1)}
+              >
+                <span className="day-label">Day {day.day}</span>
+                <span className="day-date">{formatDisplayDate(day.date) || ''}</span>
+              </button>
+            ))}
+          </nav>
 
-              return (
-                <section key={`${dayLabel}-${day.date ?? ''}`} className="day-card">
-                  <header className="day-card__header">
-                    <div>
-                      <h2>{dayLabel}</h2>
-                      {displayDate && <p className="day-card__date">{displayDate}</p>}
+          <div className="travel-content">
+            <div className="timeline-section">
+              {currentDayData && currentDayData.timeBlocks && (
+                <>
+                  <div className="timeline-header">
+                    <h2>Day {currentDayData.day} 일정</h2>
+                    <div className="weather-info">
+                      {currentDayData.weather && (
+                        <>
+                          <span className="weather-icon">{currentDayData.weather.icon}</span>
+                          <span className="weather-temp">{currentDayData.weather.temp}</span>
+                          <span className="weather-condition">{currentDayData.weather.condition}</span>
+                        </>
+                      )}
                     </div>
-                    {typeof day.totalPlaces === 'number' && (
-                      <span className="day-card__badge">{day.totalPlaces}곳 방문</span>
-                    )}
-                  </header>
-
-                  <div className="time-blocks">
-                    {timeBlocks.length === 0 ? (
-                      <div className="empty-block">등록된 일정이 없습니다.</div>
-                    ) : (
-                      timeBlocks.map(([blockLabel, places]) => (
-                        <div className="time-block" key={blockLabel}>
-                          <div className="time-block__header">
-                            <span className="time-block__slot">{blockLabel}</span>
-                            {places && places.length > 0 && (
-                              <span className="time-block__count">{places.length}곳</span>
-                            )}
-                          </div>
-                          <ul className="place-list">
-                            {(places || []).map((place, idx) => (
-                              <li className="place-item" key={place.id || `${blockLabel}-${idx}`}>
-                                <div className="place-item__title">
-                                  <span>{place.name || '미정 장소'}</span>
-                                  {place.isUserSelected && <span className="place-item__tag">직접 선택</span>}
-                                </div>
-                                {place.address && <p className="place-item__address">{place.address}</p>}
-                                {(place.description || place.category || place.rating) && (
-                                  <div className="place-item__meta">
-                                    {place.category && <span>{place.category}</span>}
-                                    {typeof place.rating === 'number' && place.rating > 0 && (
-                                      <span>⭐ {place.rating.toFixed(1)}</span>
-                                    )}
-                                  </div>
-                                )}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))
-                    )}
                   </div>
-                </section>
-              );
-            })}
-          </div>
 
-          <div className="plan-actions">
-            <button type="button" className="primary-button" onClick={handleBackToChat}>
-              채팅으로 돌아가기
-            </button>
+                  <div className="timeline">
+                    {Object.entries(currentDayData.timeBlocks).map(([time, places], index) => (
+                      <div key={`${time}-${index}`} className="timeline-item">
+                        <div className="timeline-time">
+                          <span>{time}</span>
+                        </div>
+                        <div className="timeline-marker">
+                          <div className="marker-circle"></div>
+                          {index < Object.entries(currentDayData.timeBlocks || {}).length - 1 && (
+                            <div className="marker-line"></div>
+                          )}
+                        </div>
+                        <div className="timeline-content">
+                          {places.map((place) => (
+                            <div key={place.id} className="place-card">
+                              <div className="place-header">
+                                <h3>{place.name}</h3>
+                                <span className="place-category">{place.category}</span>
+                              </div>
+                              <p className="place-address">{place.address}</p>
+                              <div className="place-meta">
+                                {place.duration && (
+                                  <span className="duration">⏱️ {place.duration}분</span>
+                                )}
+                                {place.rating && (
+                                  <span className="rating">⭐ {place.rating.toFixed(1)}</span>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
+            <aside className="side-panel">
+              <div className="map-placeholder">
+                <div className="map-icon">🗺️</div>
+                <p>지도가 여기에 표시됩니다</p>
+              </div>
+
+              <div className="day-summary">
+                <h3>일정 요약</h3>
+                <div className="summary-items">
+                  <div className="summary-row">
+                    <span>방문 장소</span>
+                    <span>{currentDayData?.totalPlaces || 0}곳</span>
+                  </div>
+                  <div className="summary-row">
+                    <span>예상 시간</span>
+                    <span>{formatDuration(currentDayData?.estimatedDuration)}</span>
+                  </div>
+                </div>
+              </div>
+
+              {meta.budget && (
+                <div className="budget-summary">
+                  <h3>예산</h3>
+                  <div className="budget-items">
+                    <div className="budget-row">
+                      <span>숙박</span>
+                      <span>{meta.budget.accommodation.toLocaleString()}원</span>
+                    </div>
+                    <div className="budget-row">
+                      <span>식비</span>
+                      <span>{meta.budget.food.toLocaleString()}원</span>
+                    </div>
+                    <div className="budget-row">
+                      <span>교통</span>
+                      <span>{meta.budget.transportation.toLocaleString()}원</span>
+                    </div>
+                    <div className="budget-row">
+                      <span>활동</span>
+                      <span>{meta.budget.activities.toLocaleString()}원</span>
+                    </div>
+                    <div className="budget-row total">
+                      <span>총 예산</span>
+                      <span>{meta.budget.total.toLocaleString()}원</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </aside>
           </div>
         </>
       )}

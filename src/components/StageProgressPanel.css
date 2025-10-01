@@ -2,10 +2,12 @@
   margin-bottom: 24px;
   padding: 20px;
   border-radius: 20px;
-  background: radial-gradient(circle at top left, rgba(102, 126, 234, 0.15), rgba(15, 23, 42, 0.85));
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.45);
-  color: #e2e8f0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: #1f2937;
+  position: relative;
+  z-index: 10;
 }
 
 .stage-progress-panel--collapsed {
@@ -23,20 +25,20 @@
   margin: 4px 0 0;
   font-size: 20px;
   font-weight: 700;
-  color: #f8fafc;
+  color: #111827;
 }
 
 .panel-kicker {
   font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(148, 163, 184, 0.85);
+  color: #6b7280;
 }
 
 .collapse-toggle {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  color: rgba(226, 232, 240, 0.9);
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #374151;
   padding: 8px 14px;
   border-radius: 999px;
   cursor: pointer;
@@ -44,7 +46,7 @@
 }
 
 .collapse-toggle:hover {
-  background: rgba(148, 163, 184, 0.2);
+  background: #e5e7eb;
 }
 
 .stage-progress-panel__content {
@@ -56,8 +58,8 @@
 .stage-section {
   padding: 20px;
   border-radius: 16px;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -74,13 +76,13 @@
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #f8fafc;
+  color: #111827;
 }
 
 .stage-section__header p {
   margin: 4px 0 0;
   font-size: 13px;
-  color: rgba(226, 232, 240, 0.65);
+  color: #6b7280;
 }
 
 .stage-section__actions {
@@ -89,9 +91,9 @@
 }
 
 .stage-section__actions button {
-  background: rgba(79, 70, 229, 0.15);
-  border: 1px solid rgba(129, 140, 248, 0.4);
-  color: rgba(224, 231, 255, 0.95);
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #374151;
   padding: 6px 12px;
   border-radius: 999px;
   font-size: 12px;
@@ -100,7 +102,8 @@
 }
 
 .stage-section__actions button:hover {
-  background: rgba(129, 140, 248, 0.25);
+  background: #e5e7eb;
+  border-color: #9ca3af;
 }
 
 .stage-selection-summary {
@@ -108,8 +111,8 @@
   align-items: baseline;
   gap: 6px;
   padding: 8px 12px;
-  background: rgba(129, 140, 248, 0.12);
-  border: 1px solid rgba(129, 140, 248, 0.3);
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
   border-radius: 10px;
   font-size: 14px;
   width: fit-content;
@@ -117,16 +120,16 @@
 
 .stage-selection-summary strong {
   font-size: 16px;
-  color: #c7d2fe;
+  color: #1e40af;
 }
 
 .stage-section__empty {
   padding: 18px;
   text-align: center;
-  background: rgba(30, 41, 59, 0.75);
-  border: 1px dashed rgba(148, 163, 184, 0.3);
+  background: #f9fafb;
+  border: 1px dashed #d1d5db;
   border-radius: 12px;
-  color: rgba(148, 163, 184, 0.9);
+  color: #6b7280;
 }
 
 .stage-section__footer {
@@ -167,9 +170,9 @@
 }
 
 .stage1-category {
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid #e5e7eb;
   border-radius: 14px;
-  background: rgba(15, 23, 42, 0.65);
+  background: white;
   overflow: hidden;
 }
 
@@ -181,18 +184,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: rgba(226, 232, 240, 0.9);
+  color: #1f2937;
   cursor: pointer;
 }
 
 .stage1-category__header h4 {
   margin: 0;
   font-size: 15px;
+  font-weight: 600;
 }
 
 .stage1-category__header span {
   font-size: 12px;
-  color: rgba(148, 163, 184, 0.8);
+  color: #6b7280;
 }
 
 .chevron {
@@ -210,6 +214,7 @@
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 12px;
   padding: 0 18px 18px;
+  background: #f9fafb;
 }
 
 .place-card {
@@ -218,23 +223,31 @@
   gap: 8px;
   padding: 14px;
   border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgba(15, 23, 42, 0.65);
-  color: inherit;
+  border: 3px solid #3b82f6;
+  background: white;
+  color: #1e293b;
   text-align: left;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  position: relative;
+  z-index: 1;
 }
 
 .place-card:hover {
-  border-color: rgba(129, 140, 248, 0.5);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.35);
+  border-color: #2563eb;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  transform: translateY(-2px);
+  z-index: 5;
 }
 
 .place-card--selected {
-  border-color: rgba(250, 204, 21, 0.6);
-  box-shadow: 0 18px 32px rgba(250, 204, 21, 0.25);
-  background: rgba(250, 204, 21, 0.1);
+  border-color: #10b981;
+  border-width: 4px;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5);
+  background: #ecfdf5;
+  z-index: 100;
+  transform: scale(1.03);
 }
 
 .place-card__header {
@@ -245,31 +258,45 @@
 }
 
 .place-card__name {
-  font-weight: 600;
-  font-size: 15px;
-  color: #f8fafc;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000000;
 }
 
 .place-card__badge {
   padding: 4px 8px;
   border-radius: 999px;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.5px;
-  background: rgba(16, 185, 129, 0.2);
-  color: #34d399;
+  font-weight: 700;
+  background: #fbbf24;
+  color: #000000;
+  border: 2px solid #f59e0b;
 }
 
 .place-card__address {
   margin: 0;
-  font-size: 12px;
-  color: rgba(148, 163, 184, 0.85);
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f2937;
 }
 
 .place-card__meta {
   display: flex;
   gap: 10px;
-  font-size: 12px;
-  color: rgba(148, 163, 184, 0.9);
+  font-size: 13px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.place-card__meta span:first-child {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #c084fc;
+  color: #000000;
+  border: 2px solid #a855f7;
 }
 
 .stage2-day-list {
@@ -279,10 +306,10 @@
 }
 
 .stage2-day-card {
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 16px;
-  background: rgba(15, 23, 42, 0.6);
+  background: white;
 }
 
 .stage2-day-card header {
@@ -295,7 +322,8 @@
 .stage2-day-card h4 {
   margin: 0;
   font-size: 15px;
-  color: #c7d2fe;
+  font-weight: 600;
+  color: #1f2937;
 }
 
 .stage2-day-card__places {
@@ -309,17 +337,22 @@
   text-align: left;
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  background: rgba(15, 23, 42, 0.55);
-  color: rgba(226, 232, 240, 0.95);
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #1e293b;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
+.stage2-place:hover {
+  background: white;
+  border-color: #d1d5db;
+}
+
 .stage2-place--selected {
-  border-color: rgba(250, 204, 21, 0.6);
-  background: rgba(250, 204, 21, 0.12);
-  box-shadow: 0 14px 24px rgba(250, 204, 21, 0.15);
+  border-color: #facc15;
+  background: #fffbeb;
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.25);
 }
 
 .stage2-place__title {
@@ -328,25 +361,31 @@
   gap: 8px;
   font-weight: 600;
   font-size: 14px;
+  color: #0f172a;
 }
 
 .stage2-place__category {
   font-size: 12px;
-  color: rgba(226, 232, 240, 0.6);
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  background: #ddd6fe;
+  color: #6d28d9;
+  border: 1px solid #c4b5fd;
 }
 
 .stage2-place__address {
   margin: 6px 0 0;
   font-size: 12px;
-  color: rgba(148, 163, 184, 0.75);
+  color: #64748b;
 }
 
 .stage3-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 12px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 14px;
   text-align: center;
@@ -356,12 +395,13 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  color: rgba(226, 232, 240, 0.75);
+  color: #6b7280;
 }
 
 .stage3-summary strong {
   font-size: 18px;
-  color: #fef3c7;
+  color: #1f2937;
+  font-weight: 700;
 }
 
 .primary-link {

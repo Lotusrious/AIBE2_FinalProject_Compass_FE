@@ -4,7 +4,8 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import MainPage from './pages/MainPage';
 import ProfilePage from './pages/ProfilePage';
-import TravelPlanPage from './pages/TravelPlanPage';
+import TravelPlanWrapper from './pages/TravelPlanWrapper';
+import MyTripsWrapper from './pages/MyTripsWrapper';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminProtectedRoute from './components/AdminProtectedRoute';
 import AdminLayout from './components/AdminLayout';
@@ -35,9 +36,14 @@ function App() {
               <ProfilePage />
             </ProtectedRoute>
           } />
+          <Route path="/my-trips" element={
+            <ProtectedRoute>
+              <MyTripsWrapper />
+            </ProtectedRoute>
+          } />
           <Route path="/travel-plan" element={
             <ProtectedRoute>
-              <TravelPlanPage />
+              <TravelPlanWrapper />
             </ProtectedRoute>
           } />
           <Route path="/dashboard" element={

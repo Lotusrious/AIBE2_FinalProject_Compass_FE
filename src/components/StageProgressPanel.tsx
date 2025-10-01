@@ -47,6 +47,20 @@ export interface Stage3Data {
   totalDays?: number;
   totalDistance?: number;
   totalTime?: number;
+  destination?: string;
+  budget?: {
+    accommodation: number;
+    food: number;
+    transportation: number;
+    activities: number;
+    total: number;
+  };
+  qualityScore?: number;
+  startDate?: string;
+  endDate?: string;
+  travelers?: string;
+  travelStyle?: string;
+  travelCompanion?: string;
 }
 
 interface StageProgressPanelProps {
@@ -287,12 +301,8 @@ const StageProgressPanel: React.FC<StageProgressPanelProps> = ({
                             <span className="place-card__name">{place.name}</span>
                             {place.isRecommended && <span className="place-card__badge">추천</span>}
                           </div>
-                          {place.address && <p className="place-card__address">{place.address}</p>}
                           <div className="place-card__meta">
                             {place.category && <span>{place.category}</span>}
-                            {typeof place.rating === 'number' && place.rating > 0 && (
-                              <span>⭐ {place.rating.toFixed(1)}</span>
-                            )}
                           </div>
                         </button>
                       );

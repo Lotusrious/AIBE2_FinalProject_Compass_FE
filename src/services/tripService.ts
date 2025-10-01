@@ -108,38 +108,9 @@ class TripService {
       return response.data.content || response.data;
     } catch (error) {
       console.error('Error fetching trips:', error);
-      
-      // MOCK FALLBACK for testing
-      console.warn('[MOCK FALLBACK] getTripsByUserId - Using mock data due to error');
-      const mockTrips: Trip[] = [
-        {
-          id: 1,
-          userId: userId,
-          title: '제주도 3박 4일',
-          destination: '제주도',
-          startDate: '2024-02-15',
-          endDate: '2024-02-18',
-          budget: 1500000,
-          tripStyle: 'LEISURE',
-          status: 'PLANNING',
-          createdAt: '2024-01-15T09:00:00Z',
-          updatedAt: '2024-01-15T10:30:00Z'
-        },
-        {
-          id: 2,
-          userId: userId,
-          title: '도쿄 벚꽃 여행',
-          destination: '도쿄',
-          startDate: '2024-04-01',
-          endDate: '2024-04-05',
-          budget: 2000000,
-          tripStyle: 'CULTURAL',
-          status: 'PLANNING',
-          createdAt: '2024-01-10T14:00:00Z',
-          updatedAt: '2024-01-10T14:00:00Z'
-        }
-      ];
-      return mockTrips;
+      // Return empty array - no mock data
+      // User must create trips through the chat interface
+      return [];
     }
   }
 

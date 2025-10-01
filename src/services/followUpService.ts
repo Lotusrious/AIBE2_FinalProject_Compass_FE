@@ -34,6 +34,7 @@ export interface FollowUpResponse {
   inputType?: 'text' | 'select' | 'multi-select' | 'date-range' | 'confirm';
   uiType?: string; // UI type hint from backend (calendar, checkbox-group, etc.)
   currentStep?: string;
+  phase?: string; // Phase 정보 추가
   progressPercentage: number;
   remainingQuestions?: number;
   collectedInfo?: Record<string, any>;
