@@ -1,6 +1,6 @@
 const DEFAULT_BASE_URL = process.env.NODE_ENV === 'development'
   ? 'http://localhost:8080'
-  : 'http://Aibe2-team3-compass-env.eba-p7j2y3nb.ap-northeast-2.elasticbeanstalk.com';
+  : ''; // Vercel rewrites will proxy to backend
 
 /**
  * Unified backend API base URL.
