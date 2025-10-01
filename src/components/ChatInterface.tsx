@@ -1027,7 +1027,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ threadId, onNewChat, isNe
         theme: string;
         places: Array<{
           name: string;
-          category: string;
+          category: string | undefined;
           duration: number;
           cost: number;
           latitude: number;
